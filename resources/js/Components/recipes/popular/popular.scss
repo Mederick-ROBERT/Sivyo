@@ -1,0 +1,63 @@
+@use '../../../css/variables.scss' as v;
+
+.popular_container {
+  width: 100%;
+  height: 180px;
+  border-radius: v.$img-border-radius;
+  overflow: hidden;
+  position: relative;
+
+  & .popular_picture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  & .popular_filter {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(77,60,34,0.5) 26%, rgba(255,255,255,0) 100%);
+  }
+
+  & .popular_data {
+    position: relative;
+    z-index: 10;
+    color: white;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1.5rem;
+    gap: .5rem;
+
+    & .popular_icon {
+      font-size: .6rem;
+      color: black;
+      background-color: white;
+      padding: .2rem;
+      border-radius: .2rem;
+      width: fit-content;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    & .popular_title {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    & .popular_time {
+      font-size: .9rem;
+    }
+  }
+}

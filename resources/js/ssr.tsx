@@ -2,8 +2,10 @@ import ReactDOMServer from 'react-dom/server';
 import { createInertiaApp } from '@inertiajs/react';
 import createServer from '@inertiajs/react/server';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { route } from '../../vendor/tightenco/ziggy';
+import { route } from 'ziggy-js';
 import { RouteName } from 'ziggy-js';
+import { ChakraProvider } from '@chakra-ui/react'
+import Layout from '../js/Layouts/app/app';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -12,7 +14,16 @@ createServer((page) =>
         page,
         render: ReactDOMServer.renderToString,
         title: (title) => `${title} - ${appName}`,
-        resolve: (name) => resolvePageComponent(`./Pages/${name}.tsx`, import.meta.glob('./Pages/**/*.tsx')),
+
+        resolve: async (name) => {
+            const page: any = await resolvePageComponent(
+                `./Pages/${name}.tsx`,
+                import.meta.glob('./Pages/**/*.tsx')
+            );
+            page.default.layout = page.default.layout || ((page: any) => <Layout children={page} />)
+            return page;
+        },
+
         setup: ({ App, props }) => {
             global.route<RouteName> = (name, params, absolute) =>
                 route(name, params, absolute, {
@@ -22,7 +33,9 @@ createServer((page) =>
                     location: new URL(page.props.ziggy.location),
                 });
 
-            return <App {...props} />;
+            return  <ChakraProvider>
+                        <App {...props} />
+                    </ChakraProvider>;
         },
     })
 );

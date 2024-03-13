@@ -1,0 +1,41 @@
+@use '../../../css/variables.scss' as v;
+
+.recipe_item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+
+  & .recipe_item_img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: v.$img-border-radius;
+  }
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+
+    &_name {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    &_intro {
+      font-size: .9rem;
+      color: v.$light-grey;
+    }
+
+    &_bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .5rem 0;
+      color: v.$light-grey;
+      font-size: .9rem;
+    }
+  }
+}

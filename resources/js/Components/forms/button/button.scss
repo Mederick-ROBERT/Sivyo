@@ -1,0 +1,17 @@
+@use '../../../../css/variables.scss' as v;
+
+.form_button {
+  width: 100%;
+  border: none;
+  border-radius: .5rem;
+  background-color: v.$color-primary;
+  color: white;
+  padding: .8rem;
+  font-size: .9rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+    background-color: v.$hoover-primary;
+  }
+}

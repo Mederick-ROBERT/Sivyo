@@ -1,0 +1,28 @@
+@use '../../../../css/variables.scss' as v;
+
+.input_group {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  margin-bottom: 1.5rem;
+}
+
+.input_label {
+  font-weight: 700;
+}
+
+.input_item {
+  width: 100%;
+  padding: .8rem;
+  border-radius: .5rem;
+  border: 1px solid v.$light-grey;
+
+  &:focus {
+    outline: none;
+    border: 1px solid v.$color-primary;
+  }
+
+  &::placeholder {
+    color: v.$light-grey;
+  }
+}

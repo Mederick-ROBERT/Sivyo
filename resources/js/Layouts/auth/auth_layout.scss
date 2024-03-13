@@ -1,0 +1,15 @@
+@use '../../../css/variables.scss' as v;
+
+.auth_header {
+  width: 100%;
+  height: v.$header-height;
+  display: flex;
+  justify-content: space-between;
+  padding: .5rem 0;
+
+  & .sivyo_logo {
+    height: 100%;
+    object-fit: contain;
+    padding: 0 .5rem;
+  }
+}
