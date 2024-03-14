@@ -11,14 +11,25 @@ use Illuminate\Http\RedirectResponse;
 
 class LoginController extends Controller
 {
+    /**
+    * Display the login view.
+     *
+     * @return \Inertia\Response
+    */
     public function handle()
     {
-        return Inertia::render('auth/login/login', [
+        return Inertia::render('Auth/Login/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
         ]);
     }
 
+    /**
+     * Log the user in
+     *
+     * @param \App\Http\Requests\Auth\LoginRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function authenticate(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();

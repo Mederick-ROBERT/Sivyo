@@ -1,7 +1,7 @@
 import './bootstrap';
 import '../css/app.css';
 
-import Layout from '../js/Layouts/app/app';
+import Layout from '@/Layouts/App/App';
 
 import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';

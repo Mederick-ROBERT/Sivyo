@@ -5,7 +5,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { route } from 'ziggy-js';
 import { RouteName } from 'ziggy-js';
 import { ChakraProvider } from '@chakra-ui/react'
-import Layout from '../js/Layouts/app/app';
+import Layout from '@/Layouts/App/App';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
