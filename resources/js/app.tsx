@@ -4,6 +4,7 @@ import '../css/app.css';
 import Layout from '@/Layouts/App/App';
 
 import { createRoot } from 'react-dom/client';
+import { hydrateRoot } from 'react-dom/client'
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ChakraProvider } from '@chakra-ui/react'
@@ -30,6 +31,12 @@ createInertiaApp({
                 <App {...props} />
             </ChakraProvider>
         );
+
+        // hydrateRoot(el,
+        //     <ChakraProvider>
+        //         <App {...props} />
+        //     </ChakraProvider>
+        // )
     },
     progress: {
         color: '#4B5563',

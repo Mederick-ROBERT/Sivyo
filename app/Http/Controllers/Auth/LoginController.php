@@ -18,10 +18,7 @@ class LoginController extends Controller
     */
     public function handle()
     {
-        return Inertia::render('Auth/Login/Login', [
-            'canResetPassword' => Route::has('password.request'),
-            'status' => session('status'),
-        ]);
+        return Inertia::render('Auth/Login/Login');
     }
 
     /**

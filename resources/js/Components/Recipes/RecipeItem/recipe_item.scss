@@ -1,5 +1,10 @@
 @use '../../../../css/variables.scss' as v;
 
+.recipe_wrapper {
+  flex: calc(24% - 1rem);
+  min-width: 300px;
+}
+
 .recipe_item {
   width: 100%;
   display: flex;

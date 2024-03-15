@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react'
+import {Head, Link} from '@inertiajs/react'
 import { PageProps } from "@/types";
 
 // region components
@@ -7,8 +7,10 @@ import RecipesList from '@/Components/Recipes/RecipesList/RecipesList'
 // endregion
 
 import './recipes.scss'
+import Pagination from "@/Components/Utils/Pagination/Pagination";
 
 export default function Recipes({ popularRecipes, allRecipes }: PageProps) {
+  const { data, next_page_url, prev_page_url } = allRecipes
 
   return (
     <div className="recipes_container">
@@ -33,7 +35,8 @@ export default function Recipes({ popularRecipes, allRecipes }: PageProps) {
           <h2 className="recipes_categories_title">Categories</h2>
         </div>
         <div className="recipes_list">
-          <RecipesList recipes={allRecipes.data} />
+          <Pagination next_page_url={next_page_url} prev_page_url={prev_page_url} />
+          <RecipesList recipes={data} />
         </div>
       </div>
     </div>

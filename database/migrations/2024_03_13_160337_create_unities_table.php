@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('unities', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
+            $table->string('symbol');
             $table->timestamps();
         });
     }

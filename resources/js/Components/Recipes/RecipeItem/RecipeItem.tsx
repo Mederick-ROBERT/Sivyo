@@ -12,7 +12,7 @@ export default function RecipeItem({ recipe }: RecipeItemProps) {
     const data = JSON.parse(content)
 
     return (
-      <Link href={`/recipe/${id}/${slug}`}>
+      <Link href={`/recipe/${id}/${slug}`} className="recipe_wrapper">
         <article className="recipe_item">
           <img src={picture} alt="recipe picture" className="recipe_item_img" />
           <div className="recipe_item_content">

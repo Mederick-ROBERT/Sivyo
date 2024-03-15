@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Utils\MealPlanCreator;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -48,6 +49,9 @@ class RegisterController extends Controller
 
         // user creation
         $user = User::create($credentials);
+
+        // meal plan creation
+        MealPlanCreator::createMealPlan($credentials['id']);
 
         event(new Registered($user));
 

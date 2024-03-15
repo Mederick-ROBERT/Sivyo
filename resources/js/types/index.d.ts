@@ -20,7 +20,16 @@ export interface Recipe {
     created_at: string;
     updated_at: string;
 
+    ingredients?: [];
+
     slug?: string;
+}
+
+export interface MealPlanRecipe {
+    id: string;
+    name: string;
+    prep_time: string;
+    picture: string;
 }
 
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
@@ -39,5 +48,7 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
 
     allRecipes: {
         data: Recipe[];
+        next_page_url: string;
+        prev_page_url: string;
     };
 };

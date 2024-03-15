@@ -2,9 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Http\Controllers\Utils\MealPlanCreator;
 use App\Models\Category;
+use App\Models\Ingredient;
+use App\Models\IngredientRecipeJoin;
 use App\Models\Recipe;
 use App\Models\Role;
+use App\Models\Unity;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,12 +20,32 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Role::create(['name' => 'User']);
-        Role::create(['name' => 'Admin']);
+        $role = Role::create(['name' => 'Admin']);
+
+        User::create([
+            'id' => 'ec8e3c80-5ab0-4da1-9f9e-96ea16cc3c16',
+            'username' => 'Admin',
+            'email' => 'admin@admin.fr',
+            'password' => '$2y$12$EzikNiqcJ395f26JKsUGhuMtIqpCgnpsPuzQdN0JpYFiWXH3Ukgk6', // azerty
+            'role_id' => $role->id,
+        ]);
+
+        MealPlanCreator::createMealPlan('ec8e3c80-5ab0-4da1-9f9e-96ea16cc3c16');
 
         Category::create(['name' => 'Entry']);
         Category::create(['name' => 'Flat']);
         Category::create(['name' => 'Dessert']);
 
-        Recipe::factory(10)->create();
+        Recipe::factory(20)->create();
+
+        Unity::create(['name' => 'gramme', 'symbol' => 'g']);
+        Unity::create(['name' => 'centilitre', 'symbol' => 'cl']);
+        Unity::create(['name' => 'piece', 'symbol' => 'pcs']);
+        Unity::create(['name' => 'cuillère à soupe', 'symbol' => 'c. à s.']);
+        Unity::create(['name' => 'cuillère à café', 'symbol' => 'c. à c.']);
+
+        Ingredient::factory(100)->create();
+
+        IngredientRecipeJoin::factory(100)->create();
     }
 }

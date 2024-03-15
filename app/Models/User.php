@@ -47,4 +47,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the user's meal plan
+     */
+    public function mealPlan() {
+        return $this->hasOne(MealPlan::class);
+    }
 }

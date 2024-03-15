@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ingredients', function (Blueprint $table) {
+        Schema::create('meal_plans', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->uuid('unity_id');
-            $table->mediumText('picture')->nullable();
+            $table->uuid('user_id');
+            $table->integer('week_number')->nullable();
+            $table->json('meals');
 
 
-            $table->foreign('unity_id')->references('id')->on('unities')->cascadeOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ingredients');
+        Schema::dropIfExists('meal_plans');
     }
 };

@@ -1,0 +1,12 @@
+.meal_plan_item_recipe_container {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.recipe_button_wrapper {
+  display: flex;
+  gap: .2rem;
+  justify-content: space-between;
+  align-items: center;
+}

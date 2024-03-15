@@ -1,12 +1,19 @@
 import { Head } from '@inertiajs/react'
-import { PageProps } from '@/types';
+import MealPlanList from "@/Components/MealPlan/MealPlanList/MealPlanList";
+import {Recipe} from "@/types";
 
-export default function Dashboard({ auth }: PageProps) {
+interface DashboardProps {
+  mealPlan: any;
+  recipes: Recipe[];
+}
+
+export default function Dashboard({ mealPlan, recipes }: DashboardProps) {
   return (
     <>
       <Head title="Dashboard" />
       <h1>Dashboard</h1>
-      <p>Welcome </p>
+      <p>Meal Plan </p>
+      <MealPlanList mealPlan={mealPlan} recipes={recipes} />
     </>
   )
 }
