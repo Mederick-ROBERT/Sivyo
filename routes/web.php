@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
 // region Controllers
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\App\DashboardController;
 use App\Http\Controllers\App\RecipesController;
+use App\Http\Controllers\App\MealPlan\MealPlanController;
 // endregion
 
 // Landing page route
@@ -22,6 +22,9 @@ Route::middleware(['auth', 'verified'])
     /// Recipes route
     Route::get('recipes', [RecipesController::class, 'handle'])->name('recipes');
     Route::get('recipe/{id}/{name}', [RecipesController::class, 'show'])->name('recipes.show');
+
+    /// Meal Plan route
+    Route::put('change-meal-plan', [MealPlanController::class, 'update'])->name('change-meal-plan');
 
   });
 

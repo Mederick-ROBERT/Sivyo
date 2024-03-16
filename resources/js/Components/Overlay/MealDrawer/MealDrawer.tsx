@@ -20,6 +20,7 @@ interface MealDrawerProps {
 }
 
 export default function MealDrawer({ isOpen, onClose, meal, type, recipes }: MealDrawerProps) {
+  console.log('MEAL', meal.date, type);
   return (
     <div>
       <Drawer

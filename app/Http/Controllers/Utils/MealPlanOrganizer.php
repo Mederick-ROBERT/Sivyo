@@ -23,75 +23,20 @@ class MealPlanOrganizer extends Controller
 
         $meals = json_decode($mealPlan->meals, true);
 
-        // Monday
-        $data['MON'] = [
-            'date' => $weekDays[0]->isoFormat('dddd, D MMMM'),
-            'day' => $weekDays[0]->isoFormat('D'),
-            'meals' => [
-                'Lunch' => $meals['mondayLunch'] ? Recipe::where('id', $meals['mondayLunch'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned',
-                'Dinner' => $meals['mondayDinner'] ? Recipe::where('id', $meals['mondayDinner'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned'
-            ]
-        ];
-
-        // Tuesday
-        $data['TUE'] = [
-            'date' => $weekDays[1]->isoFormat('dddd, D MMMM'),
-            'day' => $weekDays[1]->isoFormat('D'),
-            'meals' => [
-                'Lunch' => $meals['tuesdayLunch'] ? Recipe::where('id', $meals['tuesdayLunch'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned',
-                'Dinner' => $meals['tuesdayDinner'] ? Recipe::where('id', $meals['tuesdayDinner'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned'
-            ]
-        ];
-
-        // Wednesday
-        $data['WED'] = [
-            'date' => $weekDays[2]->isoFormat('dddd, D MMMM'),
-            'day' => $weekDays[2]->isoFormat('D'),
-            'meals' => [
-                'Lunch' => $meals['wednesdayLunch'] ? Recipe::where('id', $meals['wednesdayLunch'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned',
-                'Dinner' => $meals['wednesdayDinner'] ? Recipe::where('id', $meals['wednesdayDinner'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned'
-            ]
-        ];
-
-        // Thursday
-        $data['THU'] = [
-            'date' => $weekDays[3]->isoFormat('dddd, D MMMM'),
-            'day' => $weekDays[3]->isoFormat('D'),
-            'meals' => [
-                'Lunch' => $meals['thursdayLunch'] ? Recipe::where('id', $meals['thursdayLunch'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned',
-                'Dinner' => $meals['thursdayDinner'] ? Recipe::where('id', $meals['thursdayDinner'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned'
-            ]
-        ];
-
-        // Friday
-        $data['FRI'] = [
-            'date' => $weekDays[4]->isoFormat('dddd, D MMMM'),
-            'day' => $weekDays[4]->isoFormat('D'),
-            'meals' => [
-                'Lunch' => $meals['fridayLunch'] ? Recipe::where('id', $meals['fridayLunch'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned',
-                'Dinner' => $meals['fridayDinner'] ? Recipe::where('id', $meals['fridayDinner'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned'
-            ]
-        ];
-
-        // Saturday
-        $data['SAT'] = [
-            'date' => $weekDays[5]->isoFormat('dddd, D MMMM'),
-            'day' => $weekDays[5]->isoFormat('D'),
-            'meals' => [
-                'Lunch' => $meals['saturdayLunch'] ? Recipe::where('id', $meals['saturdayLunch'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned',
-                'Dinner' => $meals['saturdayDinner'] ? Recipe::where('id', $meals['saturdayDinner'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned'
-            ]
-        ];
-
-        // Sunday
-        $data['SUN'] = [
-            'date' => $weekDays[6]->isoFormat('dddd, D MMMM'),
-            'day' => $weekDays[6]->isoFormat('D'),
-            'meals' => [
-                'Lunch' => $meals['sundayLunch'] ? Recipe::where('id', $meals['sundayLunch'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned',
-                'Dinner' => $meals['sundayDinner'] ? Recipe::where('id', $meals['sundayDinner'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned'
-            ]
-        ];
+        foreach (['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] as $index => $day) {
+            $data[$day] = [
+                'date' => $weekDays[$index]->isoFormat('dddd, D MMMM'),
+                'day' => $weekDays[$index]->isoFormat('D'),
+                'Lunch' => [
+                    'id' => $meals[$day . 'Lunch']['id'],
+                    'data' => $meals[$day . 'Lunch']['data'] ? Recipe::where('id', $meals[$day . 'Lunch'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned'
+                ],
+                'Dinner' => [
+                    'id' => $meals[$day . 'Dinner']['id'],
+                    'data' => $meals[$day . 'Dinner']['data'] ? Recipe::where('id', $meals[$day . 'Dinner'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned',
+                ],
+            ];
+        }
 
         return $data;
     }
