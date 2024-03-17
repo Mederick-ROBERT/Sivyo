@@ -29,11 +29,11 @@ class MealPlanOrganizer extends Controller
                 'day' => $weekDays[$index]->isoFormat('D'),
                 'Lunch' => [
                     'id' => $meals[$day . 'Lunch']['id'],
-                    'data' => $meals[$day . 'Lunch']['data'] ? Recipe::where('id', $meals[$day . 'Lunch'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned'
+                    'data' => $meals[$day . 'Lunch']['data'] ? Recipe::where('id', $meals[$day . 'Lunch']['data'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned'
                 ],
                 'Dinner' => [
                     'id' => $meals[$day . 'Dinner']['id'],
-                    'data' => $meals[$day . 'Dinner']['data'] ? Recipe::where('id', $meals[$day . 'Dinner'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned',
+                    'data' => $meals[$day . 'Dinner']['data'] ? Recipe::where('id', $meals[$day . 'Dinner']['data'])->first()->only('id', 'name', 'prep_time', 'picture') : 'No meal planned',
                 ],
             ];
         }

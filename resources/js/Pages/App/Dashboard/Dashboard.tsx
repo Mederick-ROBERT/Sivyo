@@ -1,16 +1,11 @@
-import {Head, Link} from '@inertiajs/react'
+import {Head} from '@inertiajs/react'
 import {Recipe} from "@/types";
 import {useState} from "react";
 
-import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-} from '@chakra-ui/react'
+import RecipeDrawer from "@/Components/Overlay/RecipeDrawer/RecipeDrawer";
+import MealPlanItem from "@/Components/MealPlan/MealPlanItem/MealPlanItem";
+
+import './dashboard.scss'
 
 interface DashboardProps {
   mealPlan: any;
@@ -18,81 +13,34 @@ interface DashboardProps {
 }
 
 export default function Dashboard({ mealPlan, recipes }: DashboardProps) {
-  console.log(mealPlan);
 
   const [open, setOpen] = useState(false)
 
   const [id, setId] = useState('')
 
+  // change the status of the drawer
   function changeStatusDrawer() {
     setOpen(!open)
   }
 
+  // change the id of the meal
   function changeId(meal: any) {
     setId(meal.id)
   }
-console.log(id)
+
   return (
     <>
       <Head title="Dashboard" />
-      <h1>Dashboard</h1>
-      <p>Meal Plan </p>
-      {Object.keys(mealPlan).map((day) => {
-        return (
-          <div key={day}>
-            <h2>{mealPlan[day].date}</h2>
-            <div>
-              {mealPlan[day] && mealPlan[day].Lunch.data.id ? (
-                <p>{mealPlan[day].Lunch.data.name}</p>
-              ) : (
-                <p>{mealPlan[day].Lunch.data}</p>
-              )}
-              <button onClick={() => {
-                changeId(mealPlan[day].Lunch);
-                changeStatusDrawer();
-              }}>Change
-              </button>
-            </div>
-            <div>
-              {mealPlan[day] && mealPlan[day].Dinner.data.id ? (
-                <p>{mealPlan[day].Dinner.data.name}</p>
-              ) : (
-                <p>{mealPlan[day].Dinner.data}</p>
-              )}
-              <button onClick={() => {
-                changeId(mealPlan[day].Dinner);
-                changeStatusDrawer();
-              }}>Change
-              </button>
-            </div>
-          </div>
-        )
-      })}
-      <Drawer
-        isOpen={open}
-        placement='right'
-        onClose={changeStatusDrawer}
-      >
-        <DrawerOverlay/>
-        <DrawerContent>
-          <DrawerCloseButton/>
-          <DrawerHeader>Change the meal</DrawerHeader>
-
-          <DrawerBody>
-            {recipes.map((recipe) => {
-              return (
-                <div key={recipe.id}>
-                  <Link href={'/change-meal-plan'} method={'put'} as={'button'} data={{ mealId: id, recipeId: recipe.id }}><p>{recipe.name}</p></Link>
-                </div>
-              )
-            })}
-          </DrawerBody>
-
-          <DrawerFooter>
-            <button onClick={changeStatusDrawer}>Close</button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+      <h1 className="dashboard_title">Dashboard</h1>
+      <h2 className="meal_plan_title">Meal Plan</h2>
+      <div className="meal_plan_container">
+        {Object.keys(mealPlan).map((day) => {
+          return (
+            <MealPlanItem mealPlan={mealPlan[day]} changeStatusDrawer={changeStatusDrawer} changeId={changeId} key={day} />
+          )
+        })}
+      </div>
+      <RecipeDrawer open={open} changeStatusDrawer={changeStatusDrawer} recipes={recipes} mealId={id} />
     </>
   )
 }

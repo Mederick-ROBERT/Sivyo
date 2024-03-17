@@ -32,13 +32,13 @@ class MealPlanController extends Controller
         }
 
         // update the meal plan
-        MealPlan::where('user_id', $user->id)->update([
+        MealPlan::where('user_id', $mealPlanOriginal->user_id)->update([
             'user_id' => $mealPlanOriginal->user_id,
             'week_number' => $mealPlanOriginal->week_number,
             'meals' => json_encode($mealPlan)
         ]);
 
-        dd($mealPlan);
+        return to_route('dashboard');
 
     }
 }
