@@ -7,7 +7,6 @@ use App\Http\Controllers\Utils\MealPlanOrganizer;
 use App\Models\MealPlan;
 use App\Models\Recipe;
 use Carbon\Carbon;
-use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -20,11 +19,17 @@ class DashboardController extends Controller
      */
     public function dashboard()
     {
-        // get the logged-in user
-        $user = Auth::user();
+        // get the meal plan for the logged-in user
+        $mealPlan = MealPlan::where('user_id', Auth::id())->first();
 
-        // get the meal plan for the user
-        $mealPlan = MealPlan::where('user_id', $user->id)->first();
+        // verify meal plan week
+        $thisWeek = Carbon::now()->week;
+
+        if($mealPlan->week_number != $thisWeek) {
+            MealPlan::where('id', $mealPlan->id)->update([
+                'week_number' => $thisWeek
+            ]);
+        }
 
         // organize the meal plan
         $organizedMealPlan = MealPlanOrganizer::organize($mealPlan);

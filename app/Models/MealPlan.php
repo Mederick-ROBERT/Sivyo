@@ -14,6 +14,7 @@ class MealPlan extends Model
     protected $fillable = [
       'id',
       'user_id',
+      'week_number',
       'meals'
     ];
 }

@@ -41,8 +41,6 @@ class RegisterController extends Controller
 
         $credentials = $request->only('username', 'email', 'password');
 
-        $credentials['id'] = Uuid::uuid4()->toString();
-
         $credentials['password'] = Hash::make($request->password);
 
         $credentials['role_id'] = Role::where('name', 'user')->first()->id;
@@ -51,7 +49,7 @@ class RegisterController extends Controller
         $user = User::create($credentials);
 
         // meal plan creation
-        MealPlanCreator::createMealPlan($credentials['id']);
+        MealPlanCreator::createMealPlan($user['id']);
 
         event(new Registered($user));
 

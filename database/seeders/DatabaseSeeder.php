@@ -22,15 +22,14 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'User']);
         $role = Role::create(['name' => 'Admin']);
 
-        User::create([
-            'id' => 'ec8e3c80-5ab0-4da1-9f9e-96ea16cc3c16',
+        $user = User::create([
             'username' => 'Admin',
             'email' => 'admin@admin.fr',
             'password' => '$2y$12$EzikNiqcJ395f26JKsUGhuMtIqpCgnpsPuzQdN0JpYFiWXH3Ukgk6', // azerty
             'role_id' => $role->id,
         ]);
 
-        MealPlanCreator::createMealPlan('ec8e3c80-5ab0-4da1-9f9e-96ea16cc3c16');
+        MealPlanCreator::createMealPlan($user->id);
 
         Category::create(['name' => 'Entry']);
         Category::create(['name' => 'Flat']);

@@ -20,10 +20,9 @@ return new class extends Migration
             $table->integer('servings');
             $table->mediumText('picture');
             $table->uuid('category_id');
-            $table->uuid('user_id')->nullable();
 
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
