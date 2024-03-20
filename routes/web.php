@@ -32,3 +32,6 @@ Route::middleware(['auth', 'verified'])
 
 // add auth route page
 require __DIR__.'/auth.php';
+
+// add profile route page
+require __DIR__.'/profile.php';

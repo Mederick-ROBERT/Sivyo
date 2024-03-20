@@ -82,7 +82,6 @@ export default function Login({ errors }: PageProps) {
               />
               <Button type={'submit'} content={'Login'} />
             </form>
-            {/*{error && <Errors errors={error} time={2} random={random} />}*/}
           </div>
         </div>
       )

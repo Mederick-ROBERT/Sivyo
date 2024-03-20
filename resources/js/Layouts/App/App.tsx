@@ -27,6 +27,11 @@ export default function Layout({ children }: LayoutProps) {
                 Recipes
               </Link>
             </li>
+            <li className="navigation_item">
+              <Link href={'/profile'} className="navigation_link">
+                Profile
+              </Link>
+            </li>
           </ul>
           <ul className="navigation_list">
             <li className="navigation_item">
