@@ -28,6 +28,11 @@
         "@chakra-ui/react": "^2.8.2",
         "@emotion/react": "^11.11.4",
         "@emotion/styled": "^11.11.0",
+        "@tiptap/extension-color": "^2.2.4",
+        "@tiptap/extension-text-style": "^2.2.4",
+        "@tiptap/pm": "^2.2.4",
+        "@tiptap/react": "^2.2.4",
+        "@tiptap/starter-kit": "^2.2.4",
         "framer-motion": "^11.0.12"
     }
 }

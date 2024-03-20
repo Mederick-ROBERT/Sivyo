@@ -15,22 +15,22 @@ Route::middleware(['auth', 'verified'])
         Route::controller(ProfileController::class)
             ->group( function() {
 
-                Route::get('/profile', 'handle')->name('profile');
+                Route::get('profile', 'handle')->name('profile');
 
             });
 
         Route::controller(UpdateProfileController::class)
             ->group( function() {
 
-                Route::put('/profile', 'update')->name('profile.update');
+                Route::put('profile', 'update')->name('profile.update');
 
             });
 
         Route::controller(ChangePasswordController::class)
             ->group( function() {
 
-                Route::get('/change-password', 'handle')->name('change-password');
-                Route::put('/change-password', 'update')->name('change-password.update');
+                Route::get('change-password', 'handle')->name('change-password');
+                Route::put('change-password', 'update')->name('change-password.update');
 
             });
 

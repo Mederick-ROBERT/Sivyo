@@ -18,7 +18,7 @@ return new class extends Migration
             $table->time('prep_time');
             $table->time('cook_time');
             $table->integer('servings');
-            $table->mediumText('picture');
+            $table->mediumText('picture')->nullable();
             $table->uuid('category_id');
 
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();

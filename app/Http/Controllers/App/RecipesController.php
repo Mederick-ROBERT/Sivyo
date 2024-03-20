@@ -4,9 +4,9 @@ namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Utils\GetIngredientByRecipe;
+use App\Http\Controllers\Utils\RecipePreparator;
 use App\Models\Recipe;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -27,25 +27,13 @@ class RecipesController extends Controller
         /*
         * Get all recipes to display on the recipes page
         */
-        $allRecipes = Recipe::paginate(8);
+        $allRecipes = Recipe::where('user_id', null)->paginate(8);
 
-        foreach ($allRecipes as $recipe) {
-          /* prep_time */
-            $hours = Carbon::parse($recipe['prep_time'])->format('H');
-            if ($hours == 0)
-                $recipe['prep_time'] = Carbon::parse($recipe['prep_time'])->isoFormat('m[ min]');
-            else
-                $recipe['prep_time'] = Carbon::parse($recipe['prep_time'])->isoFormat('H[ hr] m[ min]');
-
-
-            /* slug */
-            $recipe['slug'] = Str::slug($recipe['name']);
-
-        }
+        $allRecipesPrepared = RecipePreparator::recipe_preparation($allRecipes);
 
         return Inertia::render('App/Recipes/Recipes', [
             'popularRecipes' => $popularRecipes,
-            'allRecipes' => $allRecipes,
+            'allRecipes' => $allRecipesPrepared,
         ]);
     }
 

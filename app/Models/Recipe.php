@@ -11,6 +11,17 @@ class Recipe extends Model
     use HasFactory;
     use HasUuids;
 
+    protected $fillable = [
+      'id',
+      'name',
+      'content',
+      'prep_time',
+      'cook_time',
+      'servings',
+      'picture',
+      'category_id',
+    ];
+
     public function ingredientInRecipe()
     {
         return $this->hasMany(IngredientRecipeJoin::class);
