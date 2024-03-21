@@ -25,6 +25,11 @@ export interface Recipe {
     slug?: string;
 }
 
+export interface Category {
+    id: string;
+    name: string;
+}
+
 export interface MealPlanRecipe {
     id: string;
     name: string;
@@ -55,4 +60,6 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
         next_page_url: string;
         prev_page_url: string;
     };
+
+    categories: Category[];
 };

@@ -33,6 +33,7 @@ Route::middleware(['auth', 'verified'])
 
     /// New Recipe routes
     Route::get('new-recipe', [NewRecipeController::class, 'handle'])->name('new-recipe');
+    Route::post('new-recipe', [NewRecipeController::class, 'store'])->name('new-recipe.store');
 
   });
 

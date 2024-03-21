@@ -5,7 +5,7 @@ interface InputGroupProps {
   name: string
   type?: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  value: string
+  value: string | number
   placeholder?: string
 }
 function InputGroup(props: InputGroupProps) {
