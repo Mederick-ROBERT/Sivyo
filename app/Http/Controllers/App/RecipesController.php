@@ -37,12 +37,12 @@ class RecipesController extends Controller
         ]);
     }
 
-    /**
-     * Show the recipe page.
-     *
-     * @param int $id
-     * @return Response
-     */
+  /**
+   * Show the recipe page.
+   *
+   * @param string $id
+   * @return Response
+   */
     public function show(string $id): Response
     {
       $recipe = Recipe::with('ingredientInRecipe')->findOrFail($id);

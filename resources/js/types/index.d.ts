@@ -15,7 +15,6 @@ export interface Recipe {
     cook_time: string | null;
     picture: string | null;
     servings: number | null;
-    category_id: string;
     user_id: string | null;
     created_at: string;
     updated_at: string;

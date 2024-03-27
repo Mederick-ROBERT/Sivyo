@@ -4,16 +4,18 @@ namespace App\Http\Controllers\App\MealPlan;
 
 use App\Http\Controllers\Controller;
 use App\Models\MealPlan;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MealPlanController extends Controller
 {
-    /**
-     * Update the meal plan
-     *
-     * @param Request $request
-     */
+  /**
+   * Update the meal plan
+   *
+   * @param Request $request
+   * @return RedirectResponse
+   */
     public function update(Request $request)
     {
         // logged in user

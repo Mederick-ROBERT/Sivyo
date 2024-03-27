@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Http\Controllers\Utils\MealPlanCreator;
 use App\Models\Category;
+use App\Models\CategoryRecipeJoin;
 use App\Models\Ingredient;
 use App\Models\IngredientRecipeJoin;
 use App\Models\Recipe;
@@ -46,5 +47,7 @@ class DatabaseSeeder extends Seeder
         Ingredient::factory(100)->create();
 
         IngredientRecipeJoin::factory(100)->create();
+
+        CategoryRecipeJoin::factory(100)->create();
     }
 }

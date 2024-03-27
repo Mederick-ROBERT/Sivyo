@@ -19,7 +19,6 @@ class Recipe extends Model
       'cook_time',
       'servings',
       'picture',
-      'category_id',
     ];
 
     public function ingredientInRecipe()

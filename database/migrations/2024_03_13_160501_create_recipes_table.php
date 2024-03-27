@@ -19,9 +19,8 @@ return new class extends Migration
             $table->time('cook_time')->nullable();
             $table->integer('servings')->nullable();
             $table->mediumText('picture')->nullable();
-            $table->uuid('category_id');
 
-            $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete();
+
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

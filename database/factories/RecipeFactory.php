@@ -10,12 +10,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class RecipeFactory extends Factory
 {
-    function chooseCategory(): string
-    {
-        $data = Category::all();
-
-        return $data->random()->id;
-    }
 
     /**
      * Define the model's default state.
@@ -31,7 +25,6 @@ class RecipeFactory extends Factory
             'cook_time' => $this->faker->time(),
             'servings' => $this->faker->numberBetween(1, 10),
             'picture' => $this->faker->imageUrl(),
-            'category_id' => $this->chooseCategory(),
         ];
     }
 }
