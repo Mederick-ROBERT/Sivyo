@@ -23,8 +23,12 @@ class NewRecipeController extends Controller
 
         // all ingredients
         $ingredients = Ingredient::join('unities', 'ingredients.unity_id', '=', 'unities.id')
-          ->select('ingredients.name', 'ingredients.picture', 'unities.symbol')
+          ->select('ingredients.id', 'ingredients.name', 'ingredients.picture', 'unities.symbol')
           ->get();
+
+        foreach ($ingredients as $ingredient) {
+            $ingredient->quantity = 0;
+        }
 
         return Inertia::render('App/UserCreation/NewRecipe/NewRecipe', [
             'categories' => $categories,
@@ -42,10 +46,10 @@ class NewRecipeController extends Controller
         // validate the request
         $request->validate([
             'name' => 'required|string',
-            'content' => 'required|string',
-            'prep_time' => 'required|date_format:H:i',
-            'cook_time' => 'required|date_format:H:i',
-            'servings' => 'required|numeric',
+            'content' => 'nullable|string',
+            'prep_time' => 'nullable|date_format:H:i',
+            'cook_time' => 'nullable|date_format:H:i',
+            'servings' => 'nullable|numeric',
             'category_id' => 'required|exists:categories,id',
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);

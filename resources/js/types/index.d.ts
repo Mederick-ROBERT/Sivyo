@@ -10,13 +10,13 @@ export interface User {
 export interface Recipe {
     id: string;
     name: string;
-    content: string;
-    prep_time: string;
-    cook_time: string;
-    picture: string;
-    servings: number;
+    content: string | null;
+    prep_time: string | null;
+    cook_time: string | null;
+    picture: string | null;
+    servings: number | null;
     category_id: string;
-    user_id: string;
+    user_id: string | null;
     created_at: string;
     updated_at: string;
 
@@ -35,6 +35,15 @@ export interface MealPlanRecipe {
     name: string;
     prep_time: string;
     picture: string;
+}
+
+export interface Ingredient {
+    id: string;
+    name: string;
+    symbol: string;
+    picture: string;
+
+    quantity?: number;
 }
 
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
@@ -62,4 +71,6 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
     };
 
     categories: Category[];
+
+    ingredients: Ingredient[];
 };

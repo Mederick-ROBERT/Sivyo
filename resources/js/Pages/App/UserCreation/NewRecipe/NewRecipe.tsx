@@ -1,4 +1,4 @@
-import { PageProps, Category } from "@/types";
+import {PageProps, Category, Ingredient} from "@/types";
 import {useEffect, useState} from "react";
 import {Head, router} from "@inertiajs/react";
 
@@ -8,10 +8,46 @@ import Tiptap from "@/Components/Forms/Tiptap/Tiptap";
 import Button from '@/Components/Forms/Button/Button'
 import {useToast} from "@chakra-ui/react";
 import { IconButton } from '@chakra-ui/react'
-import { AddIcon } from '@chakra-ui/icons'
+import { AddIcon, DeleteIcon } from '@chakra-ui/icons'
+import IngredientDrawer from "@/Components/Overlay/IngredientDrawer/IngredientDrawer";
+import IngredientQuantity from "@/Components/NewRecipe/IngredientQuantity/IngredientQuantity";
 // endregion
 
-export default function NewRecipe({ categories, errors }: PageProps<Category>) {
+export default function NewRecipe({ categories, errors, ingredients }: PageProps<Category>) {
+
+    // region Ingredient
+
+    const [selectedIngredients, setSelectedIngredients] = useState([])
+
+    // Update the ingredients on value state
+    useEffect(() => {
+        setValues(prevValues => ({
+            ...prevValues,
+            ingredients: selectedIngredients
+        }));
+    }, [selectedIngredients]);
+
+    function handleAddIngredient(ingredient: Ingredient) {
+        setSelectedIngredients([...selectedIngredients, ingredient])
+    }
+
+    function handleChangeQuantity(e: any) {
+        const key = e.target.id
+        const value = e.target.value
+        setSelectedIngredients(selectedIngredients.map(ingredient => {
+            if (ingredient.id === key) {
+                ingredient.quantity = value
+            }
+            return ingredient
+        }))
+    }
+
+    // remove an ingredient from the list
+    function handleRemoveIngredient(ingredient: Ingredient) {
+        setSelectedIngredients(selectedIngredients.filter(ing => ing.id !== ingredient.id))
+    }
+
+    // endregion
 
     const [values, setValues] = useState({
         name: '',
@@ -21,6 +57,7 @@ export default function NewRecipe({ categories, errors }: PageProps<Category>) {
         picture: '',
         servings: 0,
         category_id: '',
+        ingredients: selectedIngredients,
     })
 
     const toast = useToast()
@@ -33,7 +70,7 @@ export default function NewRecipe({ categories, errors }: PageProps<Category>) {
             toast({
                 description: firstError,
                 status: 'error',
-                duration: 6000,
+                duration: 3000,
                 isClosable: true,
                 variant: 'subtle'
             })
@@ -49,6 +86,11 @@ export default function NewRecipe({ categories, errors }: PageProps<Category>) {
         })
     }
 
+
+    /**
+    * Handle the change of the tiptap editor
+    * @param content
+    */
     function handleChangeTiptap(content: string) {
         setValues({
             ...values,
@@ -56,11 +98,27 @@ export default function NewRecipe({ categories, errors }: PageProps<Category>) {
         })
     }
 
+    /**
+     * Handle the form submission
+     * @param e
+     */
     function handleSubmit(e: any) {
         e.preventDefault()
+
         console.log(values)
+
         router.post('/new-recipe', values)
     }
+
+    // region Drawer
+
+    const [isOpen, setIsOpen] = useState(false)
+
+    function changeStatusDrawer() {
+        setIsOpen(!isOpen)
+    }
+
+    // endregion
 
     return (
         <div>
@@ -78,7 +136,16 @@ export default function NewRecipe({ categories, errors }: PageProps<Category>) {
 
                 <div>
                     <p>Add ingredients</p>
-                    <IconButton aria-label='change meal' icon={<AddIcon />} />
+                    <IconButton aria-label='change meal' icon={<AddIcon />} onClick={changeStatusDrawer} />
+
+                    <div>
+                        {selectedIngredients && selectedIngredients.map((ingredient) => (
+                            <div key={ingredient.id} >
+                                <IngredientQuantity ingredient={ingredient} changeQuantity={handleChangeQuantity} />
+                                <IconButton aria-label={'delete ingredient'} icon={<DeleteIcon />} onClick={() => handleRemoveIngredient(ingredient)} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
                 <fieldset>
@@ -97,6 +164,7 @@ export default function NewRecipe({ categories, errors }: PageProps<Category>) {
 
                 <Button type={'submit'} content={'Add recipe'}/>
             </form>
+            <IngredientDrawer isOpen={isOpen} changeStatusDrawer={changeStatusDrawer} placement={'bottom'} ingredients={ingredients} handleAddIngredient={handleAddIngredient} />
         </div>
     )
 }

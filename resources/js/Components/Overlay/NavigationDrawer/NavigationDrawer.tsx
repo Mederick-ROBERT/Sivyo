@@ -20,7 +20,7 @@ export default function NavigationDrawer({ isOpen, changeStatusDrawer, placement
   return (
     <Drawer
       isOpen={isOpen}
-      placement='right'
+      placement={placement}
       onClose={changeStatusDrawer}
     >
       <DrawerOverlay />

@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name', 256);
-            $table->json('content');
-            $table->time('prep_time');
-            $table->time('cook_time');
-            $table->integer('servings');
+            $table->json('content')->nullable();
+            $table->time('prep_time')->nullable();
+            $table->time('cook_time')->nullable();
+            $table->integer('servings')->nullable();
             $table->mediumText('picture')->nullable();
             $table->uuid('category_id');
 
