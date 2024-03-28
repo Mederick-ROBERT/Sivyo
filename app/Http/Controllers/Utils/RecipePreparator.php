@@ -12,16 +12,13 @@ class RecipePreparator extends Controller
     {
         foreach ($allRecipes as $recipe) {
           /* prep_time */
-          $hours = Carbon::parse($recipe['prep_time'])->format('H');
-          if ($hours == 0)
-            $recipe['prep_time'] = Carbon::parse($recipe['prep_time'])->isoFormat('m[ min]');
-          else
-            $recipe['prep_time'] = Carbon::parse($recipe['prep_time'])->isoFormat('H[ hr] m[ min]');
-
-
-          /* slug */
-          $recipe['slug'] = Str::slug($recipe['name']);
-
+          if($recipe['prep_time'] !== null) {
+            $hours = Carbon::parse($recipe['prep_time'])->format('H');
+            if ($hours == 0)
+              $recipe['prep_time'] = Carbon::parse($recipe['prep_time'])->isoFormat('m[ min]');
+            else
+              $recipe['prep_time'] = Carbon::parse($recipe['prep_time'])->isoFormat('H[ hr] m[ min]');
+          }
         }
 
         return $allRecipes;

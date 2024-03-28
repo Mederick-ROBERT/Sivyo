@@ -14,11 +14,13 @@ class Recipe extends Model
     protected $fillable = [
       'id',
       'name',
+      'slug',
       'content',
       'prep_time',
       'cook_time',
       'servings',
       'picture',
+      'user_id',
     ];
 
     public function ingredientInRecipe()

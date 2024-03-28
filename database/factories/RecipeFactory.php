@@ -20,6 +20,7 @@ class RecipeFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
+            'slug' => $this->faker->slug,
             'content' => '{"recipe": " ' . $this->faker->text . ' "}',
             'prep_time' => $this->faker->time(),
             'cook_time' => $this->faker->time(),

@@ -10,4 +10,9 @@ class CategoryRecipeJoin extends Model
 {
     use HasFactory;
     use HasUuids;
+
+    protected $fillable = [
+      'category_id',
+      'recipe_id'
+    ];
 }

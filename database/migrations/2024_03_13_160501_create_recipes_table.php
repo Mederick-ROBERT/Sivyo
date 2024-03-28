@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name', 256);
+            $table->string('slug', 256);
             $table->json('content')->nullable();
             $table->time('prep_time')->nullable();
             $table->time('cook_time')->nullable();
