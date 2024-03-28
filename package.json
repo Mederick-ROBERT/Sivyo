@@ -8,6 +8,7 @@
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
         "@inertiajs/react": "^1.0.0",
+        "@types/dompurify": "^3.0.5",
         "@types/node": "^18.13.0",
         "@types/react": "^18.0.28",
         "@types/react-dom": "^18.0.10",
@@ -33,6 +34,7 @@
         "@tiptap/pm": "^2.2.4",
         "@tiptap/react": "^2.2.4",
         "@tiptap/starter-kit": "^2.2.4",
+        "dompurify": "^3.0.11",
         "framer-motion": "^11.0.12",
         "lucide-react": "^0.360.0"
     }
