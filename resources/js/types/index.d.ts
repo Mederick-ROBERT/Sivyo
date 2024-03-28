@@ -10,6 +10,7 @@ export interface User {
 export interface Recipe {
     id: string;
     name: string;
+    slug: string;
     content: string | null;
     prep_time: string | null;
     cook_time: string | null;
@@ -20,8 +21,6 @@ export interface Recipe {
     updated_at: string;
 
     ingredients?: [];
-
-    slug?: string;
 }
 
 export interface Category {

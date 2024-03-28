@@ -49,12 +49,16 @@ class RecipesController extends Controller
 
       $recipe['ingredients'] = GetIngredientByRecipe::handle($recipe);
 
-      $hours = Carbon::parse($recipe['prep_time'])->format('H');
+      if($recipe['prep_time'] !== null) {
+        $hours = Carbon::parse($recipe['prep_time'])->format('H');
 
-      if ($hours == 0)
+        if ($hours == 0)
           $recipe['prep_time'] = Carbon::parse($recipe['prep_time'])->isoFormat('m[ min]');
-      else
+        else
           $recipe['prep_time'] = Carbon::parse($recipe['prep_time'])->isoFormat('H[ hr] m[ min]');
+      }
+
+
 
       return Inertia::render('App/Recipes/Show/Show', [
           'recipe' => $recipe,
